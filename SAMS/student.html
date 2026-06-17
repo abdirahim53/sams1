@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>SAMS - Student Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="login.html">Login</a>
+    <a href="student.html">Student</a>
+    <a href="lecturer.html">Lecturer</a>
+    <a href="admin.html">Admin</a>
+</nav>
+
+<!-- DASHBOARD -->
+<section class="hero">
+
+    <h2>Student Dashboard</h2>
+
+    <h3>Add Student Result</h3>
+
+    <!-- INPUT FORM -->
+    <div style="text-align:center; margin-bottom:20px;">
+
+        <input type="text" id="name" placeholder="Student Name">
+        <input type="text" id="course" placeholder="Course">
+        <input type="number" id="marks" placeholder="Marks">
+
+        <button onclick="addResult()">Add Result</button>
+
+    </div>
+
+    <h3>All Student Results</h3>
+
+    <!-- TABLE -->
+    <table>
+
+        <thead>
+        <tr>
+            <th>Student Name</th>
+            <th>Course</th>
+            <th>Marks</th>
+            <th>Grade</th>
+        </tr>
+        </thead>
+
+        <tbody id="resultsTable">
+
+        <tr>
+            <td>Abdirahim</td>
+            <td>Web Development</td>
+            <td>85</td>
+            <td>A</td>
+        </tr>
+
+        <tr>
+            <td>Amina Hassan</td>
+            <td>Database Systems</td>
+            <td>81</td>
+            <td>B+</td>
+        </tr>
+
+        </tbody>
+
+    </table>
+
+    <br>
+
+    <h3>Notifications</h3>
+
+    <p>✔ Good academic progress</p>
+    <p>✔ CGPA improved this semester</p>
+    <p>✔ New results added successfully</p>
+
+</section>
+
+<!-- JAVASCRIPT -->
+<script>
+
+    function getGrade(marks) {
+        if (marks >= 80) return "A";
+        if (marks >= 70) return "B+";
+        if (marks >= 60) return "B";
+        if (marks >= 50) return "C";
+        return "F";
+    }
+
+    function addResult() {
+
+        let name = document.getElementById("name").value;
+        let course = document.getElementById("course").value;
+        let marks = document.getElementById("marks").value;
+
+        if (name === "" || course === "" || marks === "") {
+            alert("Please fill all fields");
+            return;
+        }
+
+        let grade = getGrade(parseInt(marks));
+
+        let table = document.getElementById("resultsTable");
+
+        let row = table.insertRow();
+
+        row.innerHTML = `
+        <td>${name}</td>
+        <td>${course}</td>
+        <td>${marks}</td>
+        <td>${grade}</td>
+    `;
+
+        document.getElementById("name").value = "";
+        document.getElementById("course").value = "";
+        document.getElementById("marks").value = "";
+    }
+
+</script>
+
+</body>
+</html>
